@@ -17,13 +17,34 @@ func main() {
 	// create Jaeger tracer
 	setupTracing()
 
-	// http.HandleFunc("/", home)
-	// http.HandleFunc("/call", callDatabaseService)
-	// //http.HandleFunc("/db-write", writeToDb)
+	http.HandleFunc("/", home)
+	http.HandleFunc("/call", wsCall)
+	//http.HandleFunc("/db-write", writeToDb)
 
-	// if err := http.ListenAndServe(":8080", nil); err != nil {
-	// 	panic(err)
-	// }
+	if err := http.ListenAndServe(":8086", nil); err != nil {
+		panic(err)
+	}
+}
+
+func Sum(x, y int) (sum int){
+	return x + y
+}
+
+func wsCall(w http.ResponseWriter, r *http.Request) {
+
+	log.Println("Calling google")
+
+	var responseMessage string
+	response, err := http.Get("https://www.google.com")
+	if err != nil {
+		log.Printf("The HTTP request failed with error %s\n", err)
+		responseMessage = "The HTTP request failed with error"
+	} else {
+		data, _ := ioutil.ReadAll(response.Body)
+		responseMessage = string(data) + string(data)
+	}
+	log.Print("Response message is: ")
+	log.Print(responseMessage)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
