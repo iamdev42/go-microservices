@@ -9,4 +9,6 @@ go get github.com/lib/pq
 
 Changelog:
 - added travis integration
+- implemented more examples with Jaeger and spans inside spans
+- added code coverage extension + badge
 
