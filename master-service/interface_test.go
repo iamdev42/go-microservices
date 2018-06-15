@@ -9,6 +9,6 @@ func TestSum(t *testing.T) {
 	}
 }
 
-func TestwsCall(t *testing.T){
-	wsCall()
-}
+//func TestwsCall(t *testing.T){
+//	wsCall()
+//}
